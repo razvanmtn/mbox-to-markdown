@@ -4,19 +4,21 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node server.js",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "test": "node --test"
   },
   "engines": {
     "node": ">=20"
   },
   "dependencies": {
-    "archiver": "^7.0.1",
-    "express": "^4.21.2",
+    "fflate": "^0.8.3",
     "html-to-text": "^10.0.1",
-    "libmime": "^5.3.7",
-    "mailparser": "^3.7.4",
-    "multer": "^2.5.0",
+    "postal-mime": "^4.2.0",
     "sanitize-html": "^2.14.0"
+  },
+  "devDependencies": {
+    "vite": "^8.3.6"
   }
 }

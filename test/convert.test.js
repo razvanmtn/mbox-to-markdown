@@ -3,8 +3,14 @@ import assert from 'node:assert/strict';
 import { fileURLToPath } from 'node:url';
 import { convertMessage } from '../lib/convert.js';
 import { indexMbox, readMessage } from '../lib/mbox.js';
+import { openFileSource } from '../lib/node-source.js';
 
 const fixture = fileURLToPath(new URL('./fixtures/sample.mbox', import.meta.url));
+
+async function indexedFixture() {
+  const source = await openFileSource(fixture);
+  return { source, messages: await indexMbox(source) };
+}
 
 function datedPath(iso, slug) {
   const date = new Date(iso);
@@ -15,8 +21,8 @@ function datedPath(iso, slug) {
 }
 
 test('converts html mail to markdown with attachment links', async () => {
-  const messages = await indexMbox(fixture);
-  const raw = await readMessage(fixture, messages[0].start, messages[0].end);
+  const { source, messages } = await indexedFixture();
+  const raw = await readMessage(source, messages[0].start, messages[0].end);
   const used = new Set();
   const converted = await convertMessage(raw, { used });
 
@@ -38,8 +44,8 @@ test('converts html mail to markdown with attachment links', async () => {
 });
 
 test('uses the plain-text part when there is no html', async () => {
-  const messages = await indexMbox(fixture);
-  const raw = await readMessage(fixture, messages[1].start, messages[1].end);
+  const { source, messages } = await indexedFixture();
+  const raw = await readMessage(source, messages[1].start, messages[1].end);
   const converted = await convertMessage(raw);
   assert.match(converted.markdown, /^From the archives, this line should be unquoted\.$/m);
   assert.match(converted.markdown, /^>From a nested quote\.$/m);

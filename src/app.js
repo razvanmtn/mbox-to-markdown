@@ -33,8 +33,12 @@ let selectionAnchor = null;
 let query = '';
 let currentId = null;
 let mode = 'rendered';
-let pollGeneration = 0;
 const cache = new Map();
+const ONE_GB = 1024 * 1024 * 1024;
+const worker = new Worker(new URL('./worker.js', import.meta.url), { type: 'module' });
+let requestSerial = 0;
+const reads = new Map();
+const exportsWaiting = new Map();
 let frame = 0;
 let renderedKey = '';
 let copyTimer = 0;
@@ -181,84 +185,90 @@ list.addEventListener('click', (event) => {
   openMessage(Number(row.dataset.id));
 });
 
-restore();
+worker.addEventListener('message', onWorkerMessage);
+worker.addEventListener('error', () => {
+  hideProgress();
+  setStatus('Could not start the mailbox reader.', true);
+});
+setStatus('Open an mbox file. It is read on this computer.');
 
-async function restore() {
-  try {
-    const status = await fetch('/api/status', { cache: 'no-store' }).then((response) => response.json());
-    if (status.status === 'ready' || status.status === 'scanning') poll();
-    else setStatus('Open an mbox file. It is read on this computer.');
-  } catch {
-    setStatus('The local server is not responding.', true);
+function onWorkerMessage(event) {
+  const message = event.data;
+  if (message.type === 'progress') {
+    const ratio = message.size ? message.bytesRead / message.size : 0;
+    showProgress(ratio, `Reading ${message.count || 0} emails`);
+    return;
+  }
+  if (message.type === 'ready') {
+    hideProgress();
+    loadMessages(message.messages);
+    return;
+  }
+  if (message.type === 'error') {
+    hideProgress();
+    setStatus(message.error || 'Could not read that file', true);
+    return;
+  }
+  if (message.type === 'message') {
+    const pending = reads.get(message.requestId);
+    if (!pending) return;
+    reads.delete(message.requestId);
+    pending.resolve(message.payload);
+    return;
+  }
+  if (message.type === 'message-error') {
+    const pending = reads.get(message.requestId);
+    if (!pending) return;
+    reads.delete(message.requestId);
+    pending.reject(new Error(message.error || 'Could not open this email'));
+    return;
+  }
+  if (message.type === 'zip-chunk') {
+    const pending = exportsWaiting.get(message.requestId);
+    if (!pending) return;
+    Promise.resolve(pending.onChunk?.(message.chunk)).then(() => {
+      worker.postMessage({ type: 'zip-ack', requestId: message.requestId });
+    }, (error) => {
+      worker.postMessage({ type: 'zip-fail', requestId: message.requestId, error: error.message });
+      exportsWaiting.delete(message.requestId);
+      pending.reject(error);
+    });
+    return;
+  }
+  if (message.type === 'zip-done') {
+    const pending = exportsWaiting.get(message.requestId);
+    if (!pending) return;
+    exportsWaiting.delete(message.requestId);
+    pending.resolve(message.bytes);
+    return;
+  }
+  if (message.type === 'zip-end') {
+    const pending = exportsWaiting.get(message.requestId);
+    if (!pending) return;
+    exportsWaiting.delete(message.requestId);
+    pending.resolve();
+    return;
+  }
+  if (message.type === 'zip-error') {
+    const pending = exportsWaiting.get(message.requestId);
+    if (!pending) return;
+    exportsWaiting.delete(message.requestId);
+    pending.reject(new Error(message.error || 'Export failed'));
   }
 }
 
 function upload(file) {
-  const body = new FormData();
-  body.append('file', file);
-  const request = new XMLHttpRequest();
-  request.open('POST', '/api/upload');
-  request.upload.onprogress = (event) => {
-    if (!event.lengthComputable) return;
-    showProgress(event.loaded / event.total, `Uploading ${file.name}`);
-  };
-  request.onload = () => {
-    if (request.status >= 200 && request.status < 300) {
-      showProgress(1, 'Reading emails');
-      poll();
-      return;
-    }
-    let message = 'Upload failed';
-    try { message = JSON.parse(request.responseText).error || message; } catch { /* keep fallback */ }
+  if (file.size > ONE_GB) {
     hideProgress();
-    setStatus(message, true);
-  };
-  request.onerror = () => {
-    hideProgress();
-    setStatus('Upload failed', true);
-  };
-  request.send(body);
-}
-
-async function poll() {
-  const generation = ++pollGeneration;
-  while (generation === pollGeneration) {
-    let status;
-    try {
-      status = await fetch('/api/status', { cache: 'no-store' }).then((response) => response.json());
-    } catch {
-      setStatus('The local server is not responding.', true);
-      return;
-    }
-    if (generation !== pollGeneration) return;
-    if (status.status === 'scanning') {
-      const ratio = status.size ? status.bytesRead / status.size : 0;
-      showProgress(ratio, `Reading ${status.messageCount || 0} emails`);
-      await delay(300);
-      continue;
-    }
-    hideProgress();
-    if (status.status === 'ready') {
-      await loadMessages();
-      return;
-    }
-    if (status.status === 'error') {
-      setStatus(status.error || 'Could not read that file', true);
-      return;
-    }
-    showIdle();
+    setStatus('File exceeds the 1 GB limit', true);
     return;
   }
+  showProgress(0.02, `Reading ${file.name}`);
+  worker.postMessage({ type: 'open', file });
 }
 
-async function loadMessages() {
-  const response = await fetch('/api/messages', { cache: 'no-store' });
-  const payload = await response.json();
-  if (!response.ok) {
-    setStatus(payload.error || 'Could not load emails', true);
-    return;
-  }
-  messages = payload.messages;
+function loadMessages(nextMessages) {
+  messages = nextMessages;
   selected = new Set();
   hidden = new Set();
   rules = [];
@@ -346,12 +356,21 @@ function currentPayload() {
 }
 
 function saveAttachment(id, index, filename) {
+  const attachment = cache.get(id)?.attachments?.[index];
+  if (!attachment?.content) return;
+  const type = attachment.contentType?.split(';')[0] || 'application/octet-stream';
+  saveBytes(attachment.content, filename || attachment.filename || 'attachment', type);
+}
+
+function saveBytes(bytes, filename, type) {
+  const url = URL.createObjectURL(new Blob([bytes], { type }));
   const link = document.createElement('a');
-  link.href = `/api/messages/${id}/attachments/${index}`;
-  link.download = filename || 'attachment';
+  link.href = url;
+  link.download = filename;
   document.body.append(link);
   link.click();
   link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
 function dayKey(iso) {
@@ -485,18 +504,25 @@ async function openMessage(id) {
   setCopyEnabled(false);
   updateAttachmentControl(null);
   reader.replaceChildren(emptyRead('Opening…'));
-  const response = await fetch(`/api/messages/${id}`, { cache: 'no-store' });
-  const payload = await response.json();
-  if (!response.ok) {
+  try {
+    const payload = await requestMessage(id);
+    cache.set(id, payload);
+    if (currentId === id) showPreview(payload);
+  } catch (error) {
     if (currentId === id) {
       setCopyEnabled(false);
       updateAttachmentControl(null);
-      reader.replaceChildren(emptyRead(payload.error || 'Could not open this email'));
+      reader.replaceChildren(emptyRead(error.message || 'Could not open this email'));
     }
-    return;
   }
-  cache.set(id, payload);
-  if (currentId === id) showPreview(payload);
+}
+
+function requestMessage(id) {
+  const requestId = ++requestSerial;
+  return new Promise((resolve, reject) => {
+    reads.set(requestId, { resolve, reject });
+    worker.postMessage({ type: 'read', requestId, id });
+  });
 }
 
 function showPreview(payload) {
@@ -578,25 +604,60 @@ function setCopyEnabled(enabled) {
   }
 }
 
-function downloadSelected() {
+async function downloadSelected() {
   const ids = [...selected].filter((id) => !hidden.has(id));
   if (!ids.length) return;
-  const form = document.createElement('form');
-  form.method = 'POST';
-  form.action = '/api/export';
-  const input = document.createElement('input');
-  input.type = 'hidden';
-  input.name = 'ids';
-  input.value = ids.join(',');
-  form.append(input);
-  document.body.append(form);
-  form.submit();
-  form.remove();
+  downloadButton.disabled = true;
+  let writable = null;
+  try {
+    writable = await chooseSaveTarget();
+    if (writable) {
+      await requestExport(ids, async (chunk) => {
+        await writable.write(chunk);
+      });
+      await writable.close();
+      writable = null;
+      setStatus('');
+      return;
+    }
+    const bytes = await requestExport(ids);
+    saveBytes(bytes, 'emails.zip', 'application/zip');
+    setStatus('');
+  } catch (error) {
+    if (writable) await writable.abort().catch(() => {});
+    if (error?.name !== 'AbortError') setStatus(error.message || 'Export failed', true);
+  } finally {
+    downloadButton.disabled = selected.size === 0;
+  }
 }
 
-async function clearMailbox() {
-  pollGeneration += 1;
-  await fetch('/api/session', { method: 'DELETE' });
+async function chooseSaveTarget() {
+  if (typeof window.showSaveFilePicker !== 'function') return null;
+  try {
+    const handle = await window.showSaveFilePicker({
+      suggestedName: 'emails.zip',
+      types: [{
+        description: 'Zip archive',
+        accept: { 'application/zip': ['.zip'] },
+      }],
+    });
+    return await handle.createWritable();
+  } catch (error) {
+    if (error?.name === 'AbortError') throw error;
+    return null;
+  }
+}
+
+function requestExport(ids, onChunk) {
+  const requestId = ++requestSerial;
+  return new Promise((resolve, reject) => {
+    exportsWaiting.set(requestId, { resolve, reject, onChunk });
+    worker.postMessage({ type: 'export', requestId, ids, stream: Boolean(onChunk) });
+  });
+}
+
+function clearMailbox() {
+  worker.postMessage({ type: 'close' });
   messages = [];
   selected = new Set();
   hidden = new Set();
@@ -675,8 +736,4 @@ function escapeHtml(value) {
     '"': '&quot;',
     "'": '&#39;',
   }[character]));
-}
-
-function delay(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
 }
