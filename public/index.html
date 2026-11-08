@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mbox to markdown</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="top">
+      <div class="title-block">
+        <p class="eyebrow">Local archive</p>
+        <h1>Mbox to markdown</h1>
+      </div>
+      <div class="top-actions">
+        <label class="file-button">
+          <input id="file" type="file" accept=".mbox,.mbx">
+          <span>Open mbox</span>
+        </label>
+        <button id="clear" type="button" hidden>Clear</button>
+      </div>
+    </header>
+    <div id="progress" class="progress" hidden><span id="progress-bar"></span></div>
+    <p id="status" class="status" role="status"></p>
+
+    <section id="idle" class="idle">
+      <h2>Open a mailbox</h2>
+      <p>Choose an mbox file from a Gmail export. It stays on this computer. Pick the messages you want, then download them as markdown with their attachments.</p>
+    </section>
+
+    <main id="workspace" hidden>
+      <section class="list-pane">
+        <div class="toolbar">
+          <input id="search" type="search" placeholder="Search from, subject, or label" autocomplete="off">
+          <div id="rules" class="rules"></div>
+          <div class="toolbar-actions">
+            <button id="add-rule" type="button">Add filter</button>
+            <button id="hide-matches" type="button" disabled>Hide matches</button>
+            <button id="hide-selected" type="button" disabled>Hide selected</button>
+            <button id="restore-hidden" type="button" hidden>Restore hidden</button>
+          </div>
+          <div class="toolbar-actions">
+            <button id="select-all" type="button">All</button>
+            <button id="select-matching" type="button">Matching</button>
+            <button id="select-none" type="button">None</button>
+            <button id="download" class="primary" type="button" disabled>Download selected</button>
+          </div>
+        </div>
+        <p id="counts" class="counts"></p>
+        <div id="list" class="list" tabindex="0">
+          <div id="spacer" class="spacer">
+            <div id="rows"></div>
+          </div>
+        </div>
+      </section>
+      <section class="read-pane">
+        <div class="read-toolbar">
+          <div class="read-actions">
+            <button id="copy-markdown" type="button" disabled>Copy markdown</button>
+            <div id="attachment-download" class="attachment-download" hidden>
+              <button id="download-attachment" type="button">Download attachment</button>
+              <div id="attachment-menu" class="attachment-menu" hidden></div>
+            </div>
+          </div>
+          <div class="toggle" role="tablist" aria-label="Preview format">
+            <button id="tab-rendered" type="button" role="tab" aria-selected="true">Rendered</button>
+            <button id="tab-markdown" type="button" role="tab" aria-selected="false">Markdown</button>
+          </div>
+        </div>
+        <div id="reader" class="reader">
+          <p class="empty-read">Select an email to read it.</p>
+        </div>
+      </section>
+    </main>
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

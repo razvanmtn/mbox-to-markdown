@@ -1,0 +1,5 @@
+node_modules/
+data/
+*.mbox
+!test/fixtures/sample.mbox
+.DS_Store

@@ -1,0 +1,61 @@
+From alice@example.com Mon Jan  1 12:00:00 2024
+From: Alice <alice@example.com>
+To: Bob <bob@example.com>
+Cc: Cara <cara@example.com>
+Subject: Invoice from Acme
+Date: Mon, 1 Jan 2024 12:00:00 +0000
+Message-ID: <invoice-1@example.com>
+X-Gmail-Labels: Inbox,Finance
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="mix123"
+
+--mix123
+Content-Type: multipart/related; boundary="rel123"
+
+--rel123
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+<html><body><p>Hello <b>there</b></p><img src="cid:logo@example.com" alt="logo"></body></html>
+--rel123
+Content-Type: image/png; name="logo.png"
+Content-Transfer-Encoding: base64
+Content-ID: <logo@example.com>
+Content-Disposition: inline; filename="logo.png"
+
+iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmM
+IQAAAABJRU5ErkJggg==
+--rel123--
+--mix123
+Content-Type: application/pdf; name="invoice.pdf"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="invoice.pdf"
+
+JVBERi0xLjEKMSAwIG9iajw8Pj5lbmRvYmoKdHJhaWxlcjw8Pj4KJSVFT0YK
+--mix123--
+From bob@example.com Tue Jan  2 12:00:00 2024
+From: Bob <bob@example.com>
+To: Alice <alice@example.com>
+Subject: Weekly
+ notes
+Date: Tue, 2 Jan 2024 12:00:00 +0000
+Message-ID: <notes-2@example.com>
+Content-Type: text/plain; charset="utf-8"
+
+Hello Alice
+
+>From the archives, this line should be unquoted.
+
+>>From a nested quote.
+
+Thanks
+From alice@example.com Thu Feb  1 12:00:00 2024
+From: =?UTF-8?Q?Caf=C3=A9?= <alice@example.com>
+To: Bob <bob@example.com>
+Subject: =?UTF-8?Q?Caf=C3=A9_notes?=
+Date: Thu, 1 Feb 2024 12:00:00 +0000
+Message-ID: <cafe@example.com>
+Content-Type: text/plain; charset="utf-8"
+
+A short plain note.
+From nobody@example.com Sat Feb  3 12:00:00 2024
