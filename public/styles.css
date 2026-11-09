@@ -125,6 +125,21 @@ h1 {
   flex-wrap: wrap;
 }
 
+.top-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.top-sep {
+  width: 1px;
+  height: 18px;
+  margin-inline: 10px;
+  background: color-mix(in srgb, var(--muted) 50%, transparent);
+  flex: none;
+}
+
 button, .file-button {
   border: 1px solid var(--line);
   background: var(--panel);
@@ -391,6 +406,8 @@ input[type="search"] {
   padding: 8px 2px;
 }
 
+.top-links .text-link { border-bottom: 0; padding-inline: 0; }
+
 .text-link:hover { border-bottom-color: var(--accent); color: var(--accent); }
 
 a:focus-visible {
@@ -491,6 +508,10 @@ a:focus-visible {
 .footer-bottom a:focus-visible {
   color: #fff;
   text-decoration-thickness: 2px;
+}
+
+@media (max-width: 560px) {
+  .top-sep { display: none; }
 }
 
 @media (max-width: 860px) {

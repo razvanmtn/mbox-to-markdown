@@ -203,6 +203,7 @@ test('the sample mailbox is linked and has three messages', async () => {
     'A short follow-up',
   ]);
 
+  assert.match(page('home').html, /href="sample\.mbox" download>Download a sample mbox file</);
   assert.match(page('how-it-works').html, /href="\.\.\/\.\.\/sample\.mbox"/);
   assert.match(page('guides').html, /href="\.\.\/sample\.mbox"/);
 });
