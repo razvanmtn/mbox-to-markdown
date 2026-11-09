@@ -2,6 +2,17 @@
   "name": "mbox-to-markdown",
   "version": "1.0.0",
   "private": true,
+  "description": "Turn an mbox export into Markdown files in the browser.",
+  "license": "MIT",
+  "author": "Razvan Muntian",
+  "homepage": "https://github.com/razvanmtn/mbox-to-markdown",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/razvanmtn/mbox-to-markdown.git"
+  },
+  "bugs": {
+    "url": "https://github.com/razvanmtn/mbox-to-markdown/issues"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
