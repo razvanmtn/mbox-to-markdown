@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>What mbox is — Mbox to markdown</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../guide.css">
+    <meta name="description" content="Mbox stores many email messages in one file. Gmail, Apple Mail, Thunderbird, Proton Mail, and Fastmail can all export one.">
+    <link rel="canonical" href="https://mbox-to-markdown.lostcause.dev/guides/what-is-mbox/">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#e9e2d6">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1815">
+    <link rel="icon" href="https://mbox-to-markdown.lostcause.dev/favicon-32x32.png" type="image/png" sizes="32x32">
+    <link rel="icon" href="https://mbox-to-markdown.lostcause.dev/favicon-16x16.png" type="image/png" sizes="16x16">
+    <link rel="icon" href="https://mbox-to-markdown.lostcause.dev/favicon.ico" sizes="48x48">
+    <link rel="apple-touch-icon" href="https://mbox-to-markdown.lostcause.dev/apple-touch-icon.png">
+    <link rel="manifest" href="https://mbox-to-markdown.lostcause.dev/site.webmanifest">
+    <meta property="og:title" content="What mbox is — Mbox to markdown">
+    <meta property="og:description" content="Mbox stores many email messages in one file. Gmail, Apple Mail, Thunderbird, Proton Mail, and Fastmail can all export one.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://mbox-to-markdown.lostcause.dev/guides/what-is-mbox/">
+    <meta property="og:site_name" content="Mbox to markdown">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://mbox-to-markdown.lostcause.dev/ogimage.png">
+    <meta property="og:image:alt" content="The cube, mbox-to-markdown.lostcause.dev, and the app open on a mailbox.">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="What mbox is — Mbox to markdown">
+    <meta name="twitter:description" content="Mbox stores many email messages in one file. Gmail, Apple Mail, Thunderbird, Proton Mail, and Fastmail can all export one.">
+    <meta name="twitter:image" content="https://mbox-to-markdown.lostcause.dev/ogimage.png">
+    <meta name="twitter:image:alt" content="The cube, mbox-to-markdown.lostcause.dev, and the app open on a mailbox.">
+    <link rel="describedby" href="https://mbox-to-markdown.lostcause.dev/llms.txt">
+    <meta property="article:published_time" content="2026-11-09">
+    <meta property="article:modified_time" content="2026-11-09">
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"What mbox is","description":"Mbox stores many email messages in one file. Gmail, Apple Mail, Thunderbird, Proton Mail, and Fastmail can all export one.","datePublished":"2026-11-09","dateModified":"2026-11-09","author":{"@type":"Person","name":"Razvan Muntian","url":"https://razvan.page"},"publisher":{"@type":"Person","name":"Razvan Muntian","url":"https://razvan.page"},"image":"https://mbox-to-markdown.lostcause.dev/ogimage.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://mbox-to-markdown.lostcause.dev/guides/what-is-mbox/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Mbox to markdown","item":"https://mbox-to-markdown.lostcause.dev/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://mbox-to-markdown.lostcause.dev/guides/"},{"@type":"ListItem","position":3,"name":"What mbox is","item":"https://mbox-to-markdown.lostcause.dev/guides/what-is-mbox/"}]}]}</script>
+  </head>
+  <body class="guide-page">
+    <header class="top">
+      <div class="title-block">
+        <a class="brand" href="../../"><img class="logo" src="../../logo.svg" alt="" width="36" height="36">Mbox to markdown</a>
+        <nav class="crumbs" aria-label="Breadcrumb"><span aria-hidden="true">/</span><a href="../">Guides</a></nav>
+      </div>
+      <div class="top-actions">
+        <a class="text-link" href="../../">Open the app</a>
+      </div>
+    </header>
+    <main>
+      <article class="guide">
+        <h1>What mbox is</h1>
+        <p class="guide-dek">Mbox stores many email messages in one file. Gmail, Apple Mail, Thunderbird, Proton Mail, and Fastmail can all export one.</p>
+        <p>Mbox is a way to keep a whole mailbox in a single file. This app opens that file and writes the messages you choose as Markdown.</p>
+<h2>One file, many messages</h2>
+<p>The format is defined by <a href="https://www.rfc-editor.org/rfc/rfc4155">RFC 4155</a>. Inside the file, each message is an ordinary email, as described by <a href="https://www.rfc-editor.org/rfc/rfc5322">RFC 5322</a>. The messages are stored one after another.</p>
+<p>A line that starts with <code>From </code>, then a sender and a date, marks where the next message begins. That line is part of the mailbox, not part of the message. When a line inside a message would itself start with <code>From </code>, the file stores an extra <code>&gt;</code> in front of it. This app removes that <code>&gt;</code> when it reads the message.</p>
+<figure class="shot">
+  <button type="button" class="shot-open" aria-label="View larger: An mbox file drawn as several messages separated by From lines">
+    <img src="../../images/mbox-structure.svg" alt="An mbox file drawn as several messages separated by From lines">
+  </button>
+  <figcaption>One file. Each From line starts another message.</figcaption>
+</figure>
+<p>The app also opens <code>.mbx</code>. That is the same kind of file with a different extension.</p>
+<h2>Where it is used</h2>
+<ul>
+<li><strong>Gmail.</strong> <a href="https://takeout.google.com/">Google Takeout</a> exports Mail as mbox. The steps are in <a href="../export-gmail-mbox/">Export mbox from Gmail</a>.</li>
+<li><strong>Apple Mail.</strong> Choose Mailbox, then Export Mailbox. The result is a package. Open the <code>mbox</code> file inside that package.</li>
+<li><strong>Thunderbird.</strong> A local folder is stored as an mbox file, usually with no extension, in the Thunderbird profile.</li>
+<li><strong>Proton Mail.</strong> The Import-Export app can save a folder as MBOX.</li>
+<li><strong>Fastmail.</strong> An account export can include mail as mbox.</li>
+<li><strong>Unix mail.</strong> Many mail servers and older clients, including Mutt, still keep a mailbox as one file.</li>
+</ul>
+<h2>Why this app uses it</h2>
+<p>One file is a practical export. You can copy it, put it on a disk, and open it later without the provider. The app reads that copy locally. <a href="../how-it-works/">How this app works</a> is the next step after you have the file.</p>
+      <nav class="related" aria-label="Related guides">
+        <h2>Related</h2>
+        <ul>
+          <li><a href="../how-it-works/">How this app works</a></li>
+          <li><a href="../export-gmail-mbox/">Export mbox from Gmail</a></li>
+          <li><a href="../markdown-output/">Markdown output</a></li>
+        </ul>
+      </nav>
+      </article>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-grid">
+           
+          <div class="footer-column">
+            <h2>Pages</h2>
+            <ul class="footer-nav">
+              <li><a href="../../">Home</a></li>
+              <li><a href="../../guides/" aria-current="page">Guides</a></li>
+              <li><a href="../../media-kit/">Media kit</a></li>
+              <li><a href="../../llms.txt">llms.txt</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h2>Guides</h2>
+            <ul class="footer-nav">
+              <li><a href="../how-it-works/">How this app works</a></li>
+              <li><a href="../export-gmail-mbox/">Export mbox from Gmail</a></li>
+              <li><a href="../what-is-mbox/" aria-current="page">What mbox is</a></li>
+              <li><a href="../markdown-output/">Markdown output</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h2>Links</h2>
+            <ul class="footer-social">
+              <li><a href="https://github.com/razvanmtn/mbox-to-markdown" target="_blank" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"></path></svg><span>GitHub</span></a></li>
+              <li><a href="https://lostcause.dev?ref=mboxtomarkdown" target="_blank" rel="noopener noreferrer"><img src="../../lostcause-logo.webp" alt="" width="20" height="20"><span>lostcause.dev</span></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 MBOX to Markdown</p>
+          <p>Made with ❤️ by <a href="https://razvan.page?ref=mboxtomarkdown" target="_blank" rel="noopener">Razvan Muntian</a></p>
+        </div>
+      </div>
+    </footer>
+    <dialog class="shot-lightbox" aria-label="Enlarged image">
+      <button type="button" class="shot-lightbox-close" data-close aria-label="Close">Close</button>
+      <img alt="">
+    </dialog>
+    <script src="../../guide.js"></script>
+  </body>
+</html>

@@ -2,7 +2,7 @@
   "name": "mbox-to-markdown",
   "version": "1.0.0",
   "private": true,
-  "description": "Turn an mbox export into Markdown files in the browser.",
+  "description": "Turn an mbox export into Markdown in the browser. Pick the messages you want and download them, with attachments, as a zip.",
   "license": "MIT",
   "author": "Razvan Muntian",
   "homepage": "https://github.com/razvanmtn/mbox-to-markdown",

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mbox-to-markdown.lostcause.dev/sitemap.xml

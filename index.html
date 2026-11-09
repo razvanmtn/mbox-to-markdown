@@ -3,16 +3,46 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Mbox to markdown</title>
+    <title>Mbox to markdown — mailbox exports as notes</title>
+    <meta name="description" content="Turn an mbox export into Markdown in the browser. Pick the messages you want and download them, with attachments, as a zip.">
+    <link rel="canonical" href="https://mbox-to-markdown.lostcause.dev/">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#e9e2d6">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1815">
+    <link rel="icon" href="https://mbox-to-markdown.lostcause.dev/favicon-32x32.png" type="image/png" sizes="32x32">
+    <link rel="icon" href="https://mbox-to-markdown.lostcause.dev/favicon-16x16.png" type="image/png" sizes="16x16">
+    <link rel="icon" href="https://mbox-to-markdown.lostcause.dev/favicon.ico" sizes="48x48">
+    <link rel="apple-touch-icon" href="https://mbox-to-markdown.lostcause.dev/apple-touch-icon.png">
+    <link rel="manifest" href="https://mbox-to-markdown.lostcause.dev/site.webmanifest">
+    <meta property="og:title" content="Mbox to markdown — mailbox exports as notes">
+    <meta property="og:description" content="Turn an mbox export into Markdown in the browser. Pick the messages you want and download them, with attachments, as a zip.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mbox-to-markdown.lostcause.dev/">
+    <meta property="og:site_name" content="Mbox to markdown">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://mbox-to-markdown.lostcause.dev/ogimage.png">
+    <meta property="og:image:alt" content="The cube, mbox-to-markdown.lostcause.dev, and the app open on a mailbox.">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mbox to markdown — mailbox exports as notes">
+    <meta name="twitter:description" content="Turn an mbox export into Markdown in the browser. Pick the messages you want and download them, with attachments, as a zip.">
+    <meta name="twitter:image" content="https://mbox-to-markdown.lostcause.dev/ogimage.png">
+    <meta name="twitter:image:alt" content="The cube, mbox-to-markdown.lostcause.dev, and the app open on a mailbox.">
+    <link rel="describedby" href="https://mbox-to-markdown.lostcause.dev/llms.txt">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Mbox to markdown","description":"Turn an mbox export into Markdown in the browser. Pick the messages you want and download them, with attachments, as a zip.","url":"https://mbox-to-markdown.lostcause.dev/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Person","name":"Razvan Muntian","url":"https://razvan.page"},"license":"https://opensource.org/licenses/MIT","codeRepository":"https://github.com/razvanmtn/mbox-to-markdown","sameAs":"https://github.com/razvanmtn/mbox-to-markdown"}</script>
     <link rel="stylesheet" href="/styles.css">
   </head>
   <body>
     <header class="top">
       <div class="title-block">
-        <p class="eyebrow">Local archive</p>
-        <h1>Mbox to markdown</h1>
+        <img class="logo" src="logo.svg" alt="" width="36" height="36">
+        <div>
+          <h1>Mbox to markdown</h1>
+        </div>
       </div>
       <div class="top-actions">
+        <a class="text-link" href="guides/">Guides</a>
         <label class="file-button">
           <input id="file" type="file" accept=".mbox,.mbx">
           <span>Open mbox</span>
@@ -20,12 +50,15 @@
         <button id="clear" type="button" hidden>Clear</button>
       </div>
     </header>
+    <noscript>
+      <p class="status">This app reads the mailbox in the browser and needs JavaScript.</p>
+    </noscript>
     <div id="progress" class="progress" hidden><span id="progress-bar"></span></div>
     <p id="status" class="status" role="status"></p>
 
     <section id="idle" class="idle">
       <h2>Open a mailbox</h2>
-      <p>Choose an mbox file. It stays on this computer. Pick the messages you want, then download them as markdown with their attachments.</p>
+      <p>Choose an mbox file. Pick the messages you want, then download them as markdown with their attachments.</p>
     </section>
 
     <main id="workspace" hidden>
@@ -73,5 +106,41 @@
       </section>
     </main>
     <script src="/src/app.js" type="module"></script>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-grid">
+           
+          <div class="footer-column">
+            <h2>Pages</h2>
+            <ul class="footer-nav">
+              <li><a href="./" aria-current="page">Home</a></li>
+              <li><a href="guides/">Guides</a></li>
+              <li><a href="media-kit/">Media kit</a></li>
+              <li><a href="llms.txt">llms.txt</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h2>Guides</h2>
+            <ul class="footer-nav">
+              <li><a href="guides/how-it-works/">How this app works</a></li>
+              <li><a href="guides/export-gmail-mbox/">Export mbox from Gmail</a></li>
+              <li><a href="guides/what-is-mbox/">What mbox is</a></li>
+              <li><a href="guides/markdown-output/">Markdown output</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h2>Links</h2>
+            <ul class="footer-social">
+              <li><a href="https://github.com/razvanmtn/mbox-to-markdown" target="_blank" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"></path></svg><span>GitHub</span></a></li>
+              <li><a href="https://lostcause.dev?ref=mboxtomarkdown" target="_blank" rel="noopener noreferrer"><img src="lostcause-logo.webp" alt="" width="20" height="20"><span>lostcause.dev</span></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 MBOX to Markdown</p>
+          <p>Made with ❤️ by <a href="https://razvan.page?ref=mboxtomarkdown" target="_blank" rel="noopener">Razvan Muntian</a></p>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

@@ -2,9 +2,16 @@
 
 # Mbox to markdown
 
-This app reads an mbox export and downloads the messages you select as Markdown files, with their attachments.
+Turn an mbox export into Markdown in the browser. Pick the messages you want and download them, with attachments, as a zip.
 
-A hosted version is planned. There is no public URL yet, so run it locally.
+The app is hosted at <https://mbox-to-markdown.lostcause.dev/>. You can also run it locally.
+
+## Guides
+
+- [How this app works](https://mbox-to-markdown.lostcause.dev/guides/how-it-works/)
+- [Export mbox from Gmail](https://mbox-to-markdown.lostcause.dev/guides/export-gmail-mbox/)
+- [What mbox is](https://mbox-to-markdown.lostcause.dev/guides/what-is-mbox/)
+- [Markdown output](https://mbox-to-markdown.lostcause.dev/guides/markdown-output/)
 
 ## Use it
 
@@ -13,7 +20,7 @@ A hosted version is planned. There is no public URL yet, so run it locally.
    - Gmail: [Google Takeout](https://takeout.google.com/) exports Mail as an `.mbox` file.
    - Proton Mail: the Import-Export app can save folders as MBOX.
    - Apple Mail: choose Mailbox, then Export Mailbox. Open the `mbox` file inside the exported `.mbox` package.
-2. Run the app. You need Node.js 20 or newer.
+2. Open the [hosted app](https://mbox-to-markdown.lostcause.dev/), or run it locally. You need Node.js 20 or newer for the local app.
 
    ```sh
    npm install

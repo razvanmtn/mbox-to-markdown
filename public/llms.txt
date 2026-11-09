@@ -1,0 +1,20 @@
+# Mbox to markdown
+
+> Turn an mbox export into Markdown in the browser. Pick the messages you want and download them, with attachments, as a zip.
+
+The app reads an `.mbox` or `.mbx` file in the browser. Parsing happens on that computer, and the file is not uploaded. Files larger than 1 GB are refused. The download is a zip named `emails.zip`.
+
+## Guides
+
+- [Guides](https://mbox-to-markdown.lostcause.dev/guides/): All of the guides on one page.
+- [How this app works](https://mbox-to-markdown.lostcause.dev/guides/how-it-works/): Open an mbox or mbx file in the browser, filter the messages, and download the ones you keep as Markdown with their attachments.
+- [Export mbox from Gmail](https://mbox-to-markdown.lostcause.dev/guides/export-gmail-mbox/): Use Google Takeout to save Gmail as an mbox file. Choose labels when All Mail is larger than 1 GB, then open one file in the browser.
+- [What mbox is](https://mbox-to-markdown.lostcause.dev/guides/what-is-mbox/): Mbox stores many email messages in one file. Gmail, Apple Mail, Thunderbird, Proton Mail, and Fastmail can all export one.
+- [Markdown output](https://mbox-to-markdown.lostcause.dev/guides/markdown-output/): The download is a zip of Markdown notes with YAML front matter and relative links to attachments. Markdown opens in many tools. One example is opening the folder as an Obsidian vault.
+
+## Optional
+
+- [Media kit](https://mbox-to-markdown.lostcause.dev/media-kit/): Name, description, type, colors, and graphics for writing about the app.
+- [Source code](https://github.com/razvanmtn/mbox-to-markdown): The MIT-licensed repository.
+- [razvan.page](https://razvan.page): Other projects by the author.
+- [Lost Cause Publication](https://lostcause.dev): Writing that sits alongside this project.

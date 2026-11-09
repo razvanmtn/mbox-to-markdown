@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 220" role="img">
+  <title>Open, filter, select, preview, download</title>
+  <rect width="960" height="220" fill="#f7f3eb"/>
+  <g font-family="Georgia, Palatino, serif" text-anchor="middle">
+    <g>
+      <rect x="24" y="36" width="156" height="148" rx="22" fill="#e9e2d6"/>
+      <text x="102" y="78" fill="#8d4330" font-size="13" font-family="Avenir Next, Segoe UI, sans-serif" letter-spacing="1.5">1</text>
+      <text x="102" y="112" fill="#221c17" font-size="22">Open</text>
+      <text x="102" y="142" fill="#6f675d" font-size="13" font-family="Avenir Next, Segoe UI, sans-serif">the mbox file</text>
+    </g>
+    <g>
+      <rect x="212" y="36" width="156" height="148" rx="22" fill="#e9e2d6"/>
+      <text x="290" y="78" fill="#8d4330" font-size="13" font-family="Avenir Next, Segoe UI, sans-serif" letter-spacing="1.5">2</text>
+      <text x="290" y="112" fill="#221c17" font-size="22">Filter</text>
+      <text x="290" y="142" fill="#6f675d" font-size="13" font-family="Avenir Next, Segoe UI, sans-serif">search and hide</text>
+    </g>
+    <g>
+      <rect x="400" y="36" width="156" height="148" rx="22" fill="#e9e2d6"/>
+      <text x="478" y="78" fill="#8d4330" font-size="13" font-family="Avenir Next, Segoe UI, sans-serif" letter-spacing="1.5">3</text>
+      <text x="478" y="112" fill="#221c17" font-size="22">Select</text>
+      <text x="478" y="142" fill="#6f675d" font-size="13" font-family="Avenir Next, Segoe UI, sans-serif">what to keep</text>
+    </g>
+    <g>
+      <rect x="588" y="36" width="156" height="148" rx="22" fill="#e9e2d6"/>
+      <text x="666" y="78" fill="#8d4330" font-size="13" font-family="Avenir Next, Segoe UI, sans-serif" letter-spacing="1.5">4</text>
+      <text x="666" y="112" fill="#221c17" font-size="22">Preview</text>
+      <text x="666" y="142" fill="#6f675d" font-size="13" font-family="Avenir Next, Segoe UI, sans-serif">read one message</text>
+    </g>
+    <g>
+      <rect x="776" y="36" width="160" height="148" rx="22" fill="#1e5c45"/>
+      <text x="856" y="78" fill="#f3fff8" font-size="13" font-family="Avenir Next, Segoe UI, sans-serif" letter-spacing="1.5">5</text>
+      <text x="856" y="112" fill="#f3fff8" font-size="22">Download</text>
+      <text x="856" y="142" fill="#d7f5e6" font-size="13" font-family="Avenir Next, Segoe UI, sans-serif">emails.zip</text>
+    </g>
+  </g>
+  <g fill="none" stroke="#1e5c45" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M188 102l12 8-12 8"/>
+    <path d="M376 102l12 8-12 8"/>
+    <path d="M564 102l12 8-12 8"/>
+    <path d="M752 102l12 8-12 8"/>
+  </g>
+</svg>

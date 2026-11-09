@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Markdown output — Mbox to markdown</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../guide.css">
+    <meta name="description" content="The download is a zip of Markdown notes with YAML front matter and relative links to attachments. Markdown opens in many tools. One example is opening the folder as an Obsidian vault.">
+    <link rel="canonical" href="https://mbox-to-markdown.lostcause.dev/guides/markdown-output/">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#e9e2d6">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1815">
+    <link rel="icon" href="https://mbox-to-markdown.lostcause.dev/favicon-32x32.png" type="image/png" sizes="32x32">
+    <link rel="icon" href="https://mbox-to-markdown.lostcause.dev/favicon-16x16.png" type="image/png" sizes="16x16">
+    <link rel="icon" href="https://mbox-to-markdown.lostcause.dev/favicon.ico" sizes="48x48">
+    <link rel="apple-touch-icon" href="https://mbox-to-markdown.lostcause.dev/apple-touch-icon.png">
+    <link rel="manifest" href="https://mbox-to-markdown.lostcause.dev/site.webmanifest">
+    <meta property="og:title" content="Markdown output — Mbox to markdown">
+    <meta property="og:description" content="The download is a zip of Markdown notes with YAML front matter and relative links to attachments. Markdown opens in many tools. One example is opening the folder as an Obsidian vault.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://mbox-to-markdown.lostcause.dev/guides/markdown-output/">
+    <meta property="og:site_name" content="Mbox to markdown">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://mbox-to-markdown.lostcause.dev/ogimage.png">
+    <meta property="og:image:alt" content="The cube, mbox-to-markdown.lostcause.dev, and the app open on a mailbox.">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Markdown output — Mbox to markdown">
+    <meta name="twitter:description" content="The download is a zip of Markdown notes with YAML front matter and relative links to attachments. Markdown opens in many tools. One example is opening the folder as an Obsidian vault.">
+    <meta name="twitter:image" content="https://mbox-to-markdown.lostcause.dev/ogimage.png">
+    <meta name="twitter:image:alt" content="The cube, mbox-to-markdown.lostcause.dev, and the app open on a mailbox.">
+    <link rel="describedby" href="https://mbox-to-markdown.lostcause.dev/llms.txt">
+    <meta property="article:published_time" content="2026-11-09">
+    <meta property="article:modified_time" content="2026-11-09">
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","headline":"Markdown output","description":"The download is a zip of Markdown notes with YAML front matter and relative links to attachments. Markdown opens in many tools. One example is opening the folder as an Obsidian vault.","datePublished":"2026-11-09","dateModified":"2026-11-09","author":{"@type":"Person","name":"Razvan Muntian","url":"https://razvan.page"},"publisher":{"@type":"Person","name":"Razvan Muntian","url":"https://razvan.page"},"image":"https://mbox-to-markdown.lostcause.dev/ogimage.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://mbox-to-markdown.lostcause.dev/guides/markdown-output/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Mbox to markdown","item":"https://mbox-to-markdown.lostcause.dev/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://mbox-to-markdown.lostcause.dev/guides/"},{"@type":"ListItem","position":3,"name":"Markdown output","item":"https://mbox-to-markdown.lostcause.dev/guides/markdown-output/"}]}]}</script>
+  </head>
+  <body class="guide-page">
+    <header class="top">
+      <div class="title-block">
+        <a class="brand" href="../../"><img class="logo" src="../../logo.svg" alt="" width="36" height="36">Mbox to markdown</a>
+        <nav class="crumbs" aria-label="Breadcrumb"><span aria-hidden="true">/</span><a href="../">Guides</a></nav>
+      </div>
+      <div class="top-actions">
+        <a class="text-link" href="../../">Open the app</a>
+      </div>
+    </header>
+    <main>
+      <article class="guide">
+        <h1>Markdown output</h1>
+        <p class="guide-dek">The download is a zip of Markdown notes with YAML front matter and relative links to attachments. Markdown opens in many tools. One example is opening the folder as an Obsidian vault.</p>
+        <p>Download selected saves <code>emails.zip</code>. Unzip it and you have one Markdown note per message, plus the attachments that belonged to those messages.</p>
+<figure class="shot">
+  <button type="button" class="shot-open" aria-label="View larger: A folder tree for emails.zip, with a year, a month, a note, an attachments folder, and an undated note">
+    <img src="../../images/zip-layout.png" alt="A folder tree for emails.zip, with a year, a month, a note, an attachments folder, and an undated note">
+  </button>
+  <figcaption>Notes are grouped by month. Attachments for that month sit beside them.</figcaption>
+</figure>
+<h2>The folders</h2>
+<p>A message with a usable date is written under its year and month:</p>
+<pre><code class="language-text">2024/03/2024-03-02-hello.md
+2024/03/attachments/notes.pdf</code></pre>
+<p>The file name starts with the date, then a short form of the subject. Characters that are unsafe in a file name are removed, and emoji are dropped. Names are shortened. A message with no usable date goes under <code>undated/</code>, with <code>undated-</code> in front of the subject.</p>
+<p>The date and time come from the message, written in the time zone of the computer that runs the export. If two messages in the same month would get the same name, the later one gets a <code>-2</code> suffix, then <code>-3</code>, and so on.</p>
+<h2>The note</h2>
+<p>Each note starts with YAML front matter. Empty fields are left out. <code>cc</code> and <code>bcc</code> are included when the message has them. Gmail labels come from the <code>X-Gmail-Labels</code> header and are split on commas.</p>
+<pre><code class="language-yaml">---
+type: email
+subject: &quot;Hello&quot;
+from: &quot;Ada &lt;ada@example.com&gt;&quot;
+to: &quot;Grace &lt;grace@example.com&gt;&quot;
+date: &quot;2024-03-02&quot;
+time: &quot;09:15&quot;
+labels:
+  - &quot;Inbox&quot;
+message_id: &quot;&lt;id@example.com&gt;&quot;
+---</code></pre>
+<p>The body follows. Attachments are listed at the end as ordinary Markdown links, relative to the note:</p>
+<pre><code class="language-markdown">## Attachments
+
+- [notes.pdf](attachments/notes.pdf)</code></pre>
+<p>That link points at <code>2024/03/attachments/notes.pdf</code> when the note is <code>2024/03/2024-03-02-hello.md</code>. Keep the note and the <code>attachments</code> folder together. If you move the note by itself, the link breaks.</p>
+<p>If a selected message cannot be converted, it is missing from the folders above and named in <code>export-errors.txt</code> at the top of the zip.</p>
+<h2>Open the folder</h2>
+<p>The download is Markdown, a common format that many editors and note apps can open. Unzip <code>emails.zip</code>. The notes are plain <code>.md</code> files, so you can read them in the editor you already use.</p>
+<p>One example is Obsidian. Choose Open folder as vault and select the unzipped folder. You can instead copy the year folders into a vault you already have. The properties panel shows the front matter: type, subject, from, to, date, time, labels, and message id, for the fields that message had.</p>
+<p>The attachment links are standard Markdown links, not wikilinks. They resolve because <code>attachments/</code> is next to the note. Search can cover the body and the properties, so a sender, a subject, or a label is enough to find a note. The folders are the date index: year, then month.</p>
+<figure class="shot">
+  <button type="button" class="shot-open" aria-label="View larger: The note 2024-03-02-notes-from-the-archive open in Obsidian, with properties and an Attachments link to notes.txt">
+    <img src="../../images/obsidian-note.png" alt="The note 2024-03-02-notes-from-the-archive open in Obsidian, with properties and an Attachments link to notes.txt">
+  </button>
+  <figcaption>One example: the folder opened as an Obsidian vault. Properties show the front matter. The attachment link sits at the end of the note.</figcaption>
+</figure>
+      <nav class="related" aria-label="Related guides">
+        <h2>Related</h2>
+        <ul>
+          <li><a href="../how-it-works/">How this app works</a></li>
+          <li><a href="../export-gmail-mbox/">Export mbox from Gmail</a></li>
+          <li><a href="../what-is-mbox/">What mbox is</a></li>
+        </ul>
+      </nav>
+      </article>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-grid">
+           
+          <div class="footer-column">
+            <h2>Pages</h2>
+            <ul class="footer-nav">
+              <li><a href="../../">Home</a></li>
+              <li><a href="../../guides/" aria-current="page">Guides</a></li>
+              <li><a href="../../media-kit/">Media kit</a></li>
+              <li><a href="../../llms.txt">llms.txt</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h2>Guides</h2>
+            <ul class="footer-nav">
+              <li><a href="../how-it-works/">How this app works</a></li>
+              <li><a href="../export-gmail-mbox/">Export mbox from Gmail</a></li>
+              <li><a href="../what-is-mbox/">What mbox is</a></li>
+              <li><a href="../markdown-output/" aria-current="page">Markdown output</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h2>Links</h2>
+            <ul class="footer-social">
+              <li><a href="https://github.com/razvanmtn/mbox-to-markdown" target="_blank" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"></path></svg><span>GitHub</span></a></li>
+              <li><a href="https://lostcause.dev?ref=mboxtomarkdown" target="_blank" rel="noopener noreferrer"><img src="../../lostcause-logo.webp" alt="" width="20" height="20"><span>lostcause.dev</span></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 MBOX to Markdown</p>
+          <p>Made with ❤️ by <a href="https://razvan.page?ref=mboxtomarkdown" target="_blank" rel="noopener">Razvan Muntian</a></p>
+        </div>
+      </div>
+    </footer>
+    <dialog class="shot-lightbox" aria-label="Enlarged image">
+      <button type="button" class="shot-lightbox-close" data-close aria-label="Close">Close</button>
+      <img alt="">
+    </dialog>
+    <script src="../../guide.js"></script>
+  </body>
+</html>
