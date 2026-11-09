@@ -3,4 +3,5 @@ dist/
 data/
 *.mbox
 !test/fixtures/sample.mbox
+!public/sample.mbox
 .DS_Store

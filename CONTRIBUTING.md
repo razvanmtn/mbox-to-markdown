@@ -22,7 +22,7 @@ npm run dev
 4. Add or update tests when the change affects parsing, conversion, file names, or export.
 5. Run `npm test` before you open the pull request.
 
-Do not commit a real mailbox. `.gitignore` ignores `*.mbox` except the fixture at `test/fixtures/sample.mbox`. Pull requests must not include personal mail, attachments, or private mailbox files.
+Do not commit a real mailbox. `.gitignore` ignores `*.mbox` except the fixture at `test/fixtures/sample.mbox` and the downloadable sample at `public/sample.mbox`. Pull requests must not include personal mail, attachments, or private mailbox files.
 
 ## Report a problem
 
